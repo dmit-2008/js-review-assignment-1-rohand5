@@ -216,7 +216,6 @@ function viewSavedJobDetails(id, job) {
       if (result) {
         displaySavedJobs();
         jobDetailsCard.innerHTML = "";
-        alert("Job details have been cleared.");
       }
     } catch (error) {
       console.error("Error deleting job:", error);
