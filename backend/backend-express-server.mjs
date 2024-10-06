@@ -96,11 +96,46 @@ app.post('/saved-jobs', async (req, res) => {
 app.get('/saved-jobs', async (req, res) => {
   try {
     // Fetch all saved job records from the database
-    const savedJobs = await prisma.savedJob.findMany();
+    const savedJobs = await prisma.savedJob.findMany({
+      include: {
+        job: true,
+      },
+    });
 
     res.json(savedJobs);
   } catch (error) {
     console.error('Error fetching saved jobs:', error);
+    res.status(500).json({ error: 'An internal server error occurred' });
+  }
+});
+
+// DELETE endpoint to delete a saved job by ID
+app.delete('/saved-jobs/:id', async (req, res) => {
+
+  const { id } = req.params; // Extract the job ID from the request parameters
+  console.error('---------- Delete: ', id);
+
+
+  try {
+    // Find the saved job by ID
+    const savedJob = await prisma.savedJob.findUnique({
+      where: { id: Number(id) }, // Ensure the ID is a number
+    });
+
+    // Check if the saved job exists
+    if (!savedJob) {
+      return res.status(404).json({ error: 'Saved job not found' });
+    }
+
+    // Delete the saved job from the database
+    await prisma.savedJob.delete({
+      where: { id: Number(id) },
+    });
+
+    // Send a success response
+    res.status(200).json({ message: 'Saved job deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting saved job:', error);
     res.status(500).json({ error: 'An internal server error occurred' });
   }
 });

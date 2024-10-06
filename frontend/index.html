@@ -4,11 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <meta name="description" content="">
 
   <title>Job Search</title>
 
   <!-- Link your JS File here via a script tag for parcel below -->
+   <script type="module" src="js/index.js"></script>
 
 
 </head>
@@ -30,14 +32,14 @@
     <div class="container">
       <ul id="jobs-tab-navigation" class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Search</a>
+          <a id="searchTab" class="nav-link active" aria-current="page" href="#">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">My Bookmarked Jobs</a>
+          <a id="bookmarkedTab" class="nav-link" href="#">My Bookmarked Jobs</a>
         </li>
-       
       </ul>
     </div>
+    
     <div id="search-jobs-tab" class=" container album py-3 bg-body-tertiary">
       <h5 class="text-dark">Search</h5>
       <form id="search-jobs-form">
@@ -74,11 +76,20 @@
     </div>
     <div id="my-jobs-tab" class="d-none container py-3 bg-body-tertiary">
       <h5 class="text-dark mb-1">Bookmarked Jobs</h5>
-      <div class="col-12 mb-1">
-        <ul id="my-jobs" class="px-0">
-        
-        </ul>
-      </div>
+      <div class="row ">
+
+        <div class="col-6 mb-1">
+          <ul id="my-jobs" class="px-0">
+            
+            </ul>
+        </div>
+        <div class="col-6 mb-1">
+            <div id="job-details-card2">
+
+            </div>
+        </div>
+    </div>
+
     </div>
   </main>
 
